@@ -3,6 +3,14 @@ About this theme
 
 ![image1](pix/screenshot.jpg "Moodle Bootstrap Screenshot")
 
+Forked by
+------------
+
+Modder: Kudinov Ruslan<br>
+Contact: ziont.2009@gmail.com<br>
+Git: <a href="http://github.com/zionter">zionter</a><br>
+
+
 This is the Bootstrap theme for Moodle.
 
 * package   Moodle Bootstrap 3 theme
@@ -108,3 +116,4 @@ Html5shiv.js
 Author: Sjoerd Visscher
 URL: http://en.wikipedia.org/wiki/HTML5_Shiv, https://github.com/aFarkas/html5shiv
 License: MIT/GPL2 Licensedc
+
