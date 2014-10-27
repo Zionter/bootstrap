@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of The Bootstrap 3 Moodle theme
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,93 +14,69 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+
 /**
- * Theme cerulean lib.
+ * Renderers to align Moodle's HTML with that expected by Bootstrap
  *
- * @package    theme_cerulean
- * @copyright  2014 Bas Brands
+ * @package    theme_bootstrap
+ * @copyright  2014 Bas Brands, www.basbrands.nl
+ * @authors    Bas Brands, David Scotson
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function theme_cerulean_process_css($css, $theme) {
+defined('MOODLE_INTERNAL') || die();
 
-    // Set the background image for the logo.
-    $logo = $theme->setting_file_url('logo', 'logo');
-    $css = theme_cerulean_set_logo($css, $logo);
 
-    // Set custom CSS.
-    if (!empty($theme->settings->customcss)) {
-        $customcss = $theme->settings->customcss;
-    } else {
-        $customcss = null;
+function bootstrap_grid($hassidepre, $hassidepost) {
+
+    if ($hassidepre && $hassidepost) {
+        $regions = array('content' => 'col-sm-6 col-sm-push-3 col-lg-8 col-lg-push-2');
+        $regions['pre'] = 'col-sm-3 col-sm-pull-6 col-lg-2 col-lg-pull-8';
+        $regions['post'] = 'col-sm-3 col-lg-2';
+    } else if ($hassidepre && !$hassidepost) {
+        $regions = array('content' => 'col-sm-9 col-sm-push-3 col-lg-10 col-lg-push-2');
+        $regions['pre'] = 'col-sm-3 col-sm-pull-9 col-lg-2 col-lg-pull-10';
+        $regions['post'] = 'emtpy';
+    } else if (!$hassidepre && $hassidepost) {
+        $regions = array('content' => 'col-sm-9 col-lg-10');
+        $regions['pre'] = 'empty';
+        $regions['post'] = 'col-sm-3 col-lg-2';
+    } else if (!$hassidepre && !$hassidepost) {
+        $regions = array('content' => 'col-md-12');
+        $regions['pre'] = 'empty';
+        $regions['post'] = 'empty';
     }
-    $css = theme_cerulean_set_customcss($css, $customcss);
-
-    return $css;
-}
-
-
-function theme_cerulean_set_logo($css, $logo) {
-    $logotag = '[[setting:logo]]';
-    $logoheight = '[[logoheight]]';
-    $logowidth = '[[logowidth]]';
-    $logodisplay = '[[logodisplay]]';
-    $width = '0';
-    $height = '0';
-    $display = 'none';
-    $replacement = $logo;
-    if (is_null($replacement)) {
-        $replacement = '';
-    } else {
-        $dimensions = getimagesize('http:'.$logo);
-        $width = $dimensions[0] . 'px';
-        $height = $dimensions[1] . 'px';
-        $display = 'block';
+    
+    if ('rtl' === get_string('thisdirection', 'langconfig')) {
+        if ($hassidepre && $hassidepost) {
+            $regions['pre'] = 'col-sm-3  col-sm-push-3 col-lg-2 col-lg-push-2';
+            $regions['post'] = 'col-sm-3 col-sm-pull-9 col-lg-2 col-lg-pull-10';
+        } else if ($hassidepre && !$hassidepost) {
+            $regions = array('content' => 'col-sm-9 col-lg-10');
+            $regions['pre'] = 'col-sm-3 col-lg-2';
+            $regions['post'] = 'empty';
+        } else if (!$hassidepre && $hassidepost) {
+            $regions = array('content' => 'col-sm-9 col-sm-push-3 col-lg-10 col-lg-push-2');
+            $regions['pre'] = 'empty';
+            $regions['post'] = 'col-sm-3 col-sm-pull-9 col-lg-2 col-lg-pull-10';
+        }
     }
-    $css = str_replace($logotag, $replacement, $css);
-    $css = str_replace($logoheight, $height, $css);
-    $css = str_replace($logowidth, $width, $css);
-    $css = str_replace($logodisplay, $display, $css);
-
-    return $css;
+    return $regions;
 }
 
 /**
- * Serves any files associated with the theme settings.
+ * Loads the JavaScript for the zoom function.
  *
- * @param stdClass $course
- * @param stdClass $cm
- * @param context $context
- * @param string $filearea
- * @param array $args
- * @param bool $forcedownload
- * @param array $options
- * @return bool
+ * @param moodle_page $page Pass in $PAGE.
  */
-function theme_cerulean_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-    if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo')) {
-        $theme = theme_config::load('cerulean');
-        return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
-    } else {
-        send_file_not_found();
-    }
+function theme_bootstrap_initialise_zoom(moodle_page $page) {
+    user_preference_allow_ajax_update('theme_bootstrap_zoom', PARAM_TEXT);
+    $page->requires->yui_module('moodle-theme_bootstrap-zoom', 'M.theme_bootstrap.zoom.init', array());
 }
 
 /**
- * Adds any custom CSS to the CSS before it is cached.
- *
- * @param string $css The original CSS.
- * @param string $customcss The custom CSS to add.
- * @return string The CSS which now contains our custom CSS.
+ * Get the user preference for the zoom function.
  */
-function theme_cerulean_set_customcss($css, $customcss) {
-    $tag = '[[setting:customcss]]';
-    $replacement = $customcss;
-    if (is_null($replacement)) {
-        $replacement = '';
-    }
-
-    $css = str_replace($tag, $replacement, $css);
-
-    return $css;
+function theme_bootstrap_get_zoom() {
+    return get_user_preferences('theme_bootstrap_zoom', '');
 }
