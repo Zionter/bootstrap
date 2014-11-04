@@ -1,6 +1,9 @@
+@corporate: #1baea8;
+@brand-info: #033C73;
+
 ul,
 ol {
-padding: 0;
+    padding: 0;
 }
 
 
@@ -27,27 +30,33 @@ padding: 0;
         margin-left: -10px;
         margin-right: 7px;
     }
+
     .msg-body {
         display: inline-block;
         line-height: 20px;
         max-width: 175px;
         vertical-align: middle;
     }
+
     .msg-title {
         display: inline-block;
         line-height: 14px;
     }
+
     .msg-sender {
         color: #478fca;
     }
+
     .msg-time {
         color: #777;
         display: block;
         font-size: 11px;
     }
+
     [title="new"] {
         background-color: lighten(@brand-info, 33.5%);
     }
+
     .glyphicon {
         margin-right: 5px;
     }
@@ -59,4 +68,10 @@ padding: 0;
             max-width: 500px;
         }
     }
+}
+
+.navbar {
+    background: @corporate url(http://e-learning.kubg.edu.ua/sys/kubg_logo.png) 2% 50% no-repeat;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }

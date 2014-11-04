@@ -193,7 +193,7 @@
   margin-right: @navbar-padding-horizontal;
   padding: 9px 10px;
   .navbar-vertical-align(34px);
-  background-color: transparent;
+  background-color: #eee;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   border: 1px solid transparent;
   border-radius: @border-radius-base;
@@ -392,13 +392,17 @@
   border-color: @navbar-default-border;
 
   .navbar-brand {
-    color: @navbar-default-brand-color;
+    color: #efefef;
     &:hover,
     &:focus {
-      color: @navbar-default-brand-hover-color;
+      color: @tooltip-color;
       background-color: @navbar-default-brand-hover-bg;
     }
   }
+
+  .container-fluid {
+        padding-left: 130px
+    }
 
   .navbar-text {
     color: @navbar-default-color;
