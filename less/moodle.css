@@ -259,8 +259,11 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('bootstrap3/[[font:theme|glyphicons-halflings-regular.eot');
-  src: url('bootstrap3/[[font:theme|glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('bootstrap3/[[font:theme|glyphicons-halflings-regular.woff') format('woff'), url('bootstrap3/[[font:theme|glyphicons-halflings-regular.ttf') format('truetype'), url('bootstrap3/[[font:theme|glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('bootstrap3/glyphicons-halflings-regular.eot');
+  src: url('bootstrap3/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+      url('bootstrap3/glyphicons-halflings-regular.woff') format('woff'), 
+      url('bootstrap3/glyphicons-halflings-regular.ttf') format('truetype'), 
+      url('bootstrap3/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -4168,11 +4171,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-color: #e7e7e7;
 }
 .navbar-default .navbar-brand {
-  color: #efefef;
+  color: #ffffff;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #ffffff;
+  color: #f7f7f7;
   background-color: transparent;
 }
 .navbar-default .container-fluid {
@@ -4182,23 +4185,23 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #777777;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #777777;
+  color: #f7f7f7;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #333333;
+  color: #ffffff;
   background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #555555;
+  color: #f7f7f7;
   background-color: #e7e7e7;
 }
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
 .navbar-default .navbar-nav > .disabled > a:focus {
-  color: #cccccc;
+  color: #dedede;
   background-color: transparent;
 }
 .navbar-default .navbar-toggle {
